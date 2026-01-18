@@ -1,0 +1,24 @@
+name: Keep Alive Action
+
+on:
+  schedule:
+    - cron: '0 0 1 * *' # প্রতি মাসের ১ তারিখে রান হবে
+  workflow_dispatch:
+
+jobs:
+  keep_alive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Keep Alive Commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          echo "Last run: $(date)" > keep_alive.txt
+          git add keep_alive.txt
+          git commit -m "Keep-alive: maintaining workflow activity"
+          git push
