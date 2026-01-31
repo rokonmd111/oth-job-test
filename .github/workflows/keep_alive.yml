@@ -2,7 +2,7 @@ name: Keep Alive Action
 
 on:
   schedule:
-    - cron: '0 0 1 * *' # প্রতি মাসের ১ তারিখে রান হবে
+    - cron: '0 0 * * 5' # প্রতি সপ্তাহের শুক্রবার রাত ১২টায় (UTC) রান হবে
   workflow_dispatch:
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # আমি v4 এ আপডেট করে দিয়েছি যা বর্তমানে লেটেস্ট
 
       - name: Keep Alive Commit
         run: |
